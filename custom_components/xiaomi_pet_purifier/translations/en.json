@@ -18,5 +18,60 @@
     "abort": {
       "already_configured": "This device is already configured"
     }
+  },
+  "entity": {
+    "fan": {
+      "fan": {
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "Auto": "Auto",
+              "Sleep": "Sleep",
+              "Favorite": "Manual"
+            }
+          }
+        }
+      }
+    },
+    "select": {
+      "mode": {
+        "name": "Mode",
+        "state": {
+          "Auto": "Auto",
+          "Sleep": "Sleep",
+          "Favorite": "Manual"
+        }
+      }
+    },
+    "switch": {
+      "child_lock": {
+        "name": "Pet Lock"
+      },
+      "alarm": {
+        "name": "Notification sound"
+      }
+    },
+    "number": {
+      "brightness": {
+        "name": "Display Brightness"
+      },
+      "fan_level": {
+        "name": "Fan Level (Manual)"
+      }
+    },
+    "sensor": {
+      "pm25": {
+        "name": "PM2.5"
+      },
+      "filter_life": {
+        "name": "Filter Life"
+      },
+      "filter_used_time": {
+        "name": "Filter Used Time"
+      },
+      "filter_left_time": {
+        "name": "Filter Time Remaining"
+      }
+    }
   }
 }
