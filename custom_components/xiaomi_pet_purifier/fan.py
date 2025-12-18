@@ -21,7 +21,12 @@ from .const import (
     MODE_AUTO,
     MODE_FAVORITE,
     MODE_SLEEP,
+    PIID_FAN_LEVEL,
+    PIID_MODE,
+    PIID_POWER,
     PRESET_MODES,
+    SIID_AIR_PURIFIER,
+    SIID_FAVORITE,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -110,7 +115,14 @@ class XiaomiPetAirPurifierFan(CoordinatorEntity, FanEntity):
             await self.hass.async_add_executor_job(
                 self.coordinator.device.send,
                 "set_properties",
-                [{"did": "power", "siid": 2, "piid": 1, "value": True}],
+                [
+                    {
+                        "did": "power",
+                        "siid": SIID_AIR_PURIFIER,
+                        "piid": PIID_POWER,
+                        "value": True,
+                    }
+                ],
             )
 
             if preset_mode:
@@ -129,7 +141,14 @@ class XiaomiPetAirPurifierFan(CoordinatorEntity, FanEntity):
             await self.hass.async_add_executor_job(
                 self.coordinator.device.send,
                 "set_properties",
-                [{"did": "power", "siid": 2, "piid": 1, "value": False}],
+                [
+                    {
+                        "did": "power",
+                        "siid": SIID_AIR_PURIFIER,
+                        "piid": PIID_POWER,
+                        "value": False,
+                    }
+                ],
             )
             await self.coordinator.async_request_refresh()
 
@@ -149,7 +168,14 @@ class XiaomiPetAirPurifierFan(CoordinatorEntity, FanEntity):
             await self.hass.async_add_executor_job(
                 self.coordinator.device.send,
                 "set_properties",
-                [{"did": "mode", "siid": 2, "piid": 5, "value": mode_value}],
+                [
+                    {
+                        "did": "mode",
+                        "siid": SIID_AIR_PURIFIER,
+                        "piid": PIID_MODE,
+                        "value": mode_value,
+                    }
+                ],
             )
             await self.coordinator.async_request_refresh()
 
@@ -172,7 +198,14 @@ class XiaomiPetAirPurifierFan(CoordinatorEntity, FanEntity):
             await self.hass.async_add_executor_job(
                 self.coordinator.device.send,
                 "set_properties",
-                [{"did": "fan_level", "siid": 8, "piid": 1, "value": fan_level}],
+                [
+                    {
+                        "did": "fan_level",
+                        "siid": SIID_FAVORITE,
+                        "piid": PIID_FAN_LEVEL,
+                        "value": fan_level,
+                    }
+                ],
             )
             await self.coordinator.async_request_refresh()
 
