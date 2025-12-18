@@ -18,5 +18,60 @@
     "abort": {
       "already_configured": "Toto zařízení je již nakonfigurováno"
     }
+  },
+  "entity": {
+    "fan": {
+      "fan": {
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "Auto": "Automatický",
+              "Sleep": "Spánek",
+              "Favorite": "Manuální"
+            }
+          }
+        }
+      }
+    },
+    "select": {
+      "mode": {
+        "name": "Režim",
+        "state": {
+          "Auto": "Automatický",
+          "Sleep": "Spánek",
+          "Favorite": "Manuální"
+        }
+      }
+    },
+    "switch": {
+      "child_lock": {
+        "name": "Dětský zámek (Pet Lock)"
+      },
+      "alarm": {
+        "name": "Zvukové upozornění"
+      }
+    },
+    "number": {
+      "brightness": {
+        "name": "Jas displeje"
+      },
+      "fan_level": {
+        "name": "Úroveň ventilátoru (Manuální)"
+      }
+    },
+    "sensor": {
+      "pm25": {
+        "name": "PM2.5"
+      },
+      "filter_life": {
+        "name": "Životnost filtru"
+      },
+      "filter_used_time": {
+        "name": "Doba používání filtru"
+      },
+      "filter_left_time": {
+        "name": "Zbývající čas filtru"
+      }
+    }
   }
 }
