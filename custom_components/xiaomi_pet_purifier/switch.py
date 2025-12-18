@@ -8,7 +8,13 @@ from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import DOMAIN
+from .const import (
+    DOMAIN,
+    PIID_ALARM,
+    PIID_CHILD_LOCK,
+    SIID_ALARM,
+    SIID_PHYSICAL_CONTROLS,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -29,8 +35,8 @@ async def async_setup_entry(
             "child_lock",
             "Child Lock",
             "mdi:lock",
-            7,
-            1,
+            SIID_PHYSICAL_CONTROLS,
+            PIID_CHILD_LOCK,
         ),
         XiaomiPetAirPurifierSwitch(
             coordinator,
@@ -38,8 +44,8 @@ async def async_setup_entry(
             "alarm",
             "Buzzer",
             "mdi:volume-high",
-            6,
-            1,
+            SIID_ALARM,
+            PIID_ALARM,
         ),
     ]
 
