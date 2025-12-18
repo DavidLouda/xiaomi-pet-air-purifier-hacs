@@ -44,7 +44,6 @@ class XiaomiPetAirPurifierModeSelect(CoordinatorEntity, SelectEntity):
     def __init__(self, coordinator, device_name: str) -> None:
         """Initialize the select entity."""
         super().__init__(coordinator)
-        self._attr_name = f"{device_name} Mode"
         self._attr_unique_id = f"{coordinator.entry.entry_id}_mode"
         self._attr_options = list(MODE_TO_VALUE.keys())
         self._attr_icon = "mdi:air-purifier"
