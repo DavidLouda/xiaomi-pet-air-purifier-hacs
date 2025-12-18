@@ -8,7 +8,15 @@ from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import DOMAIN, PIID_BRIGHTNESS, SIID_SCREEN
+from .const import (
+    DOMAIN,
+    FAN_SPEED_MAX,
+    FAN_SPEED_MIN,
+    PIID_BRIGHTNESS,
+    PIID_FAN_LEVEL,
+    SIID_FAVORITE,
+    SIID_SCREEN,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -34,6 +42,18 @@ async def async_setup_entry(
             1,
             SIID_SCREEN,
             PIID_BRIGHTNESS,
+        ),
+        XiaomiPetAirPurifierNumber(
+            coordinator,
+            name,
+            "fan_level",
+            "Favorite Level",
+            "mdi:weather-windy",
+            FAN_SPEED_MIN,
+            FAN_SPEED_MAX,
+            1,
+            SIID_FAVORITE,
+            PIID_FAN_LEVEL,
         ),
     ]
 
@@ -82,6 +102,10 @@ class XiaomiPetAirPurifierNumber(CoordinatorEntity, NumberEntity):
     async def async_set_native_value(self, value: float) -> None:
         """Set new value."""
         try:
+            # Optimistic update
+            self.coordinator.data[self._number_type] = int(value)
+            self.async_write_ha_state()
+
             await self.hass.async_add_executor_job(
                 self.coordinator.device.send,
                 "set_properties",
