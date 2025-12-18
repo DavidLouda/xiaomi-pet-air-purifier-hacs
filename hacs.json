@@ -1,8 +1,7 @@
 {
   "name": "Xiaomi Pet Air Purifier",
   "content_in_root": false,
-  "filename": "xiaomi_pet_purifier",
   "render_readme": true,
   "homeassistant": "2023.1.0",
-  "logo": "logo.png"
+  "domains": ["xiaomi_pet_purifier"]
 }
