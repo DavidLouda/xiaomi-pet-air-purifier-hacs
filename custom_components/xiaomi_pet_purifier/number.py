@@ -35,7 +35,6 @@ async def async_setup_entry(
             coordinator,
             name,
             "brightness",
-            "Display Brightness",
             "mdi:brightness-6",
             0,
             2,
@@ -47,7 +46,6 @@ async def async_setup_entry(
             coordinator,
             name,
             "fan_level",
-            "Favorite Level",
             "mdi:weather-windy",
             FAN_SPEED_MIN,
             FAN_SPEED_MAX,
@@ -63,12 +61,13 @@ async def async_setup_entry(
 class XiaomiPetAirPurifierNumber(CoordinatorEntity, NumberEntity):
     """Representation of a Xiaomi Pet Air Purifier number entity."""
 
+    _attr_has_entity_name = True
+
     def __init__(
         self,
         coordinator,
         device_name: str,
         number_type: str,
-        number_name: str,
         icon: str,
         min_value: int,
         max_value: int,
@@ -81,7 +80,6 @@ class XiaomiPetAirPurifierNumber(CoordinatorEntity, NumberEntity):
         self._number_type = number_type
         self._siid = siid
         self._piid = piid
-        self._attr_name = f"{device_name} {number_name}"
         self._attr_unique_id = f"{coordinator.entry.entry_id}_{number_type}"
         self._attr_icon = icon
         self._attr_native_min_value = min_value
@@ -93,6 +91,7 @@ class XiaomiPetAirPurifierNumber(CoordinatorEntity, NumberEntity):
             "manufacturer": "Xiaomi",
             "model": "Smart Pet Care Air Purifier (CPA5)",
         }
+        self._attr_translation_key = number_type
 
     @property
     def native_value(self) -> float | None:
