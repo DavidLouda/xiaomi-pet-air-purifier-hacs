@@ -2,32 +2,32 @@
   "config": {
     "step": {
       "user": {
-        "title": "Xiaomi Pet Air Purifier Setup",
-        "description": "Enter the device connection details",
+        "title": "Configuración del Purificador de Aire Xiaomi Pet",
+        "description": "Introduzca los detalles de conexión del dispositivo",
         "data": {
-          "host": "IP Address",
+          "host": "Dirección IP",
           "token": "Token",
-          "name": "Device Name"
+          "name": "Nombre del dispositivo"
         }
       }
     },
     "error": {
-      "cannot_connect": "Failed to connect to the device. Please check the IP address and token.",
-      "unknown": "An unexpected error occurred"
+      "cannot_connect": "No se pudo conectar al dispositivo. Por favor, verifique la dirección IP y el token.",
+      "unknown": "Ocurrió un error inesperado"
     },
     "abort": {
-      "already_configured": "This device is already configured"
+      "already_configured": "Este dispositivo ya está configurado"
     }
   },
   "entity": {
     "fan": {
       "fan": {
-        "name": "Air Purifier",
+        "name": "Purificador de Aire",
         "state_attributes": {
           "preset_mode": {
             "state": {
               "Auto": "Auto",
-              "Sleep": "Sleep",
+              "Sleep": "Sueño",
               "Favorite": "Manual"
             }
           }
@@ -36,28 +36,28 @@
     },
     "select": {
       "mode": {
-        "name": "Mode",
+        "name": "Modo",
         "state": {
           "Auto": "Auto",
-          "Sleep": "Sleep",
+          "Sleep": "Sueño",
           "Favorite": "Manual"
         }
       }
     },
     "switch": {
       "child_lock": {
-        "name": "Pet Lock"
+        "name": "Bloqueo para mascotas"
       },
       "alarm": {
-        "name": "Notification sound"
+        "name": "Sonido de notificación"
       }
     },
     "number": {
       "brightness": {
-        "name": "Display Brightness"
+        "name": "Brillo de la pantalla"
       },
       "fan_level": {
-        "name": "Fan Level (Manual)"
+        "name": "Nivel del ventilador (Manual)"
       }
     },
     "sensor": {
@@ -65,13 +65,13 @@
         "name": "PM2.5"
       },
       "filter_life": {
-        "name": "Filter Life"
+        "name": "Vida útil del filtro"
       },
       "filter_used_time": {
-        "name": "Filter Used Time"
+        "name": "Tiempo de uso del filtro"
       },
       "filter_left_time": {
-        "name": "Filter Time Remaining"
+        "name": "Tiempo restante del filtro"
       }
     }
   }

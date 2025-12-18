@@ -41,29 +41,28 @@ async def async_setup_entry(
 ) -> None:
     """Set up the fan platform."""
     coordinator = hass.data[DOMAIN][entry.entry_id]
-    name = entry.data.get(CONF_NAME, "Pet Air Purifier")
 
-    async_add_entities([XiaomiPetAirPurifierFan(coordinator, name)], True)
+    async_add_entities([XiaomiPetAirPurifierFan(coordinator)], True)
 
 
 class XiaomiPetAirPurifierFan(CoordinatorEntity, FanEntity):
     """Representation of Xiaomi Pet Air Purifier as a fan."""
 
     _attr_has_entity_name = True
-    _attr_name = None
+    _attr_translation_key = "fan"
     _attr_supported_features = (
         FanEntityFeature.PRESET_MODE | FanEntityFeature.SET_SPEED
     )
     _attr_preset_modes = PRESET_MODES
     _attr_speed_count = int_states_in_range(SPEED_RANGE)
 
-    def __init__(self, coordinator, name: str) -> None:
+    def __init__(self, coordinator) -> None:
         """Initialize the fan."""
         super().__init__(coordinator)
         self._attr_unique_id = f"{coordinator.entry.entry_id}_fan"
         self._attr_device_info = {
             "identifiers": {(DOMAIN, coordinator.entry.entry_id)},
-            "name": name,
+            "name": coordinator.entry.data.get(CONF_NAME, "Pet Air Purifier"),
             "manufacturer": "Xiaomi",
             "model": "Smart Pet Care Air Purifier (CPA5)",
         }

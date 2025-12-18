@@ -1,0 +1,78 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Einrichtung des Xiaomi Haustier-Luftreinigers",
+        "description": "Geben Sie die Verbindungsdaten des Geräts ein",
+        "data": {
+          "host": "IP-Adresse",
+          "token": "Token",
+          "name": "Gerätename"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Verbindung zum Gerät fehlgeschlagen. Bitte überprüfen Sie IP-Adresse und Token.",
+      "unknown": "Ein unerwarteter Fehler ist aufgetreten"
+    },
+    "abort": {
+      "already_configured": "Dieses Gerät ist bereits konfiguriert"
+    }
+  },
+  "entity": {
+    "fan": {
+      "fan": {
+        "name": "Luftreiniger",
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "Auto": "Automatisch",
+              "Sleep": "Schlaf",
+              "Favorite": "Manuell"
+            }
+          }
+        }
+      }
+    },
+    "select": {
+      "mode": {
+        "name": "Modus",
+        "state": {
+          "Auto": "Automatisch",
+          "Sleep": "Schlaf",
+          "Favorite": "Manuell"
+        }
+      }
+    },
+    "switch": {
+      "child_lock": {
+        "name": "Kindersicherung (Pet Lock)"
+      },
+      "alarm": {
+        "name": "Benachrichtigungston"
+      }
+    },
+    "number": {
+      "brightness": {
+        "name": "Displayhelligkeit"
+      },
+      "fan_level": {
+        "name": "Lüfterstufe (Manuell)"
+      }
+    },
+    "sensor": {
+      "pm25": {
+        "name": "PM2.5"
+      },
+      "filter_life": {
+        "name": "Filterlebensdauer"
+      },
+      "filter_used_time": {
+        "name": "Filternutzungsdauer"
+      },
+      "filter_left_time": {
+        "name": "Verbleibende Filterzeit"
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Налаштування Xiaomi Pet Air Purifier",
+        "description": "Введіть дані для підключення до пристрою",
+        "data": {
+          "host": "IP-адреса",
+          "token": "Токен",
+          "name": "Назва пристрою"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Не вдалося підключитися до пристрою. Перевірте IP-адресу та токен.",
+      "unknown": "Сталася неочікувана помилка"
+    },
+    "abort": {
+      "already_configured": "Цей пристрій вже налаштовано"
+    }
+  },
+  "entity": {
+    "fan": {
+      "fan": {
+        "name": "Очищувач повітря",
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "Auto": "Авто",
+              "Sleep": "Сон",
+              "Favorite": "Ручний"
+            }
+          }
+        }
+      }
+    },
+    "select": {
+      "mode": {
+        "name": "Режим",
+        "state": {
+          "Auto": "Авто",
+          "Sleep": "Сон",
+          "Favorite": "Ручний"
+        }
+      }
+    },
+    "switch": {
+      "child_lock": {
+        "name": "Блокування від дітей (Pet Lock)"
+      },
+      "alarm": {
+        "name": "Звук сповіщення"
+      }
+    },
+    "number": {
+      "brightness": {
+        "name": "Яскравість дисплея"
+      },
+      "fan_level": {
+        "name": "Рівень вентилятора (Ручний)"
+      }
+    },
+    "sensor": {
+      "pm25": {
+        "name": "PM2.5"
+      },
+      "filter_life": {
+        "name": "Ресурс фільтра"
+      },
+      "filter_used_time": {
+        "name": "Час використання фільтра"
+      },
+      "filter_left_time": {
+        "name": "Час, що залишився для фільтра"
+      }
+    }
+  }
+}

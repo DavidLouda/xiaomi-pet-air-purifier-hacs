@@ -1,0 +1,78 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Konfiguracja Xiaomi Pet Air Purifier",
+        "description": "Wprowadź dane połączenia z urządzeniem",
+        "data": {
+          "host": "Adres IP",
+          "token": "Token",
+          "name": "Nazwa urządzenia"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Nie udało się połączyć z urządzeniem. Sprawdź adres IP i token.",
+      "unknown": "Wystąpił nieoczekiwany błąd"
+    },
+    "abort": {
+      "already_configured": "To urządzenie jest już skonfigurowane"
+    }
+  },
+  "entity": {
+    "fan": {
+      "fan": {
+        "name": "Oczyszczacz powietrza",
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "Auto": "Automatyczny",
+              "Sleep": "Sen",
+              "Favorite": "Manualny"
+            }
+          }
+        }
+      }
+    },
+    "select": {
+      "mode": {
+        "name": "Tryb",
+        "state": {
+          "Auto": "Automatyczny",
+          "Sleep": "Sen",
+          "Favorite": "Manualny"
+        }
+      }
+    },
+    "switch": {
+      "child_lock": {
+        "name": "Blokada rodzicielska (Pet Lock)"
+      },
+      "alarm": {
+        "name": "Dźwięk powiadomienia"
+      }
+    },
+    "number": {
+      "brightness": {
+        "name": "Jasność wyświetlacza"
+      },
+      "fan_level": {
+        "name": "Poziom wentylatora (Manualny)"
+      }
+    },
+    "sensor": {
+      "pm25": {
+        "name": "PM2.5"
+      },
+      "filter_life": {
+        "name": "Żywotność filtra"
+      },
+      "filter_used_time": {
+        "name": "Czas użycia filtra"
+      },
+      "filter_left_time": {
+        "name": "Pozostały czas filtra"
+      }
+    }
+  }
+}

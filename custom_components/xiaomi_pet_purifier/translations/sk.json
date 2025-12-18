@@ -2,21 +2,21 @@
   "config": {
     "step": {
       "user": {
-        "title": "Nastavení Xiaomi Pet Air Purifier",
-        "description": "Zadejte údaje pro připojení k zařízení",
+        "title": "Nastavenie Xiaomi Pet Air Purifier",
+        "description": "Zadajte údaje pre pripojenie k zariadeniu",
         "data": {
           "host": "IP Adresa",
           "token": "Token",
-          "name": "Název zařízení"
+          "name": "Názov zariadenia"
         }
       }
     },
     "error": {
-      "cannot_connect": "Nepodařilo se připojit k zařízení. Zkontrolujte IP adresu a token.",
-      "unknown": "Nastala neočekávaná chyba"
+      "cannot_connect": "Nepodarilo sa pripojiť k zariadeniu. Skontrolujte IP adresu a token.",
+      "unknown": "Nastala neočakávaná chyba"
     },
     "abort": {
-      "already_configured": "Toto zařízení je již nakonfigurováno"
+      "already_configured": "Toto zariadenie je už nakonfigurované"
     }
   },
   "entity": {
@@ -27,8 +27,8 @@
           "preset_mode": {
             "state": {
               "Auto": "Automatický",
-              "Sleep": "Spánek",
-              "Favorite": "Manuální"
+              "Sleep": "Spánok",
+              "Favorite": "Manuálny"
             }
           }
         }
@@ -39,25 +39,25 @@
         "name": "Režim",
         "state": {
           "Auto": "Automatický",
-          "Sleep": "Spánek",
-          "Favorite": "Manuální"
+          "Sleep": "Spánok",
+          "Favorite": "Manuálny"
         }
       }
     },
     "switch": {
       "child_lock": {
-        "name": "Dětský zámek (Pet Lock)"
+        "name": "Detský zámok (Pet Lock)"
       },
       "alarm": {
-        "name": "Zvukové upozornění"
+        "name": "Zvukové upozornenie"
       }
     },
     "number": {
       "brightness": {
-        "name": "Jas displeje"
+        "name": "Jas displeja"
       },
       "fan_level": {
-        "name": "Úroveň ventilátoru (Manuální)"
+        "name": "Úroveň ventilátora (Manuálny)"
       }
     },
     "sensor": {
@@ -65,13 +65,13 @@
         "name": "PM2.5"
       },
       "filter_life": {
-        "name": "Životnost filtru"
+        "name": "Životnosť filtra"
       },
       "filter_used_time": {
-        "name": "Doba používání filtru"
+        "name": "Doba používania filtra"
       },
       "filter_left_time": {
-        "name": "Zbývající čas filtru"
+        "name": "Zostávajúci čas filtra"
       }
     }
   }
