@@ -8,7 +8,7 @@ from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import DOMAIN
+from .const import DOMAIN, PIID_BRIGHTNESS, SIID_SCREEN
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -32,8 +32,8 @@ async def async_setup_entry(
             0,
             2,
             1,
-            5,
-            1,
+            SIID_SCREEN,
+            PIID_BRIGHTNESS,
         ),
     ]
 
