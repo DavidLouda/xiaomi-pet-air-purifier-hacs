@@ -33,7 +33,7 @@ async def async_setup_entry(
             coordinator,
             name,
             "child_lock",
-            "Child Lock",
+            "Pet Lock",
             "mdi:lock",
             SIID_PHYSICAL_CONTROLS,
             PIID_CHILD_LOCK,
@@ -42,7 +42,7 @@ async def async_setup_entry(
             coordinator,
             name,
             "alarm",
-            "Buzzer",
+            "Notification sound",
             "mdi:volume-high",
             SIID_ALARM,
             PIID_ALARM,
@@ -79,6 +79,7 @@ class XiaomiPetAirPurifierSwitch(CoordinatorEntity, SwitchEntity):
             "manufacturer": "Xiaomi",
             "model": "Smart Pet Care Air Purifier (CPA5)",
         }
+        self._attr_translation_key = switch_type
 
     @property
     def is_on(self) -> bool:
@@ -88,6 +89,10 @@ class XiaomiPetAirPurifierSwitch(CoordinatorEntity, SwitchEntity):
     async def async_turn_on(self, **kwargs) -> None:
         """Turn the switch on."""
         try:
+            # Optimistic update
+            self.coordinator.data[self._switch_type] = True
+            self.async_write_ha_state()
+
             await self.hass.async_add_executor_job(
                 self.coordinator.device.send,
                 "set_properties",
@@ -103,11 +108,18 @@ class XiaomiPetAirPurifierSwitch(CoordinatorEntity, SwitchEntity):
             await self.coordinator.async_request_refresh()
 
         except Exception as ex:
+            # Revert on failure
+            self.coordinator.data[self._switch_type] = False
+            self.async_write_ha_state()
             _LOGGER.error("Failed to turn on %s: %s", self._switch_type, ex)
 
     async def async_turn_off(self, **kwargs) -> None:
         """Turn the switch off."""
         try:
+            # Optimistic update
+            self.coordinator.data[self._switch_type] = False
+            self.async_write_ha_state()
+
             await self.hass.async_add_executor_job(
                 self.coordinator.device.send,
                 "set_properties",
@@ -123,6 +135,9 @@ class XiaomiPetAirPurifierSwitch(CoordinatorEntity, SwitchEntity):
             await self.coordinator.async_request_refresh()
 
         except Exception as ex:
+            # Revert on failure
+            self.coordinator.data[self._switch_type] = True
+            self.async_write_ha_state()
             _LOGGER.error("Failed to turn off %s: %s", self._switch_type, ex)
 
     @callback
