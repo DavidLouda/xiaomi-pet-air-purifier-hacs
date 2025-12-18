@@ -7,5 +7,5 @@
   "config_flow": true,
   "requirements": ["python-miio>=0.5.12"],
   "iot_class": "local_polling",
-  "version": "1.0.0"
+  "version": "1.0.1"
 }
