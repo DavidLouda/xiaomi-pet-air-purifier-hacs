@@ -1,0 +1,11 @@
+{
+  "domain": "xiaomi_pet_purifier",
+  "name": "Xiaomi Pet Air Purifier",
+  "documentation": "https://github.com/DavidLouda/xiaomi-pet-air-purifier-hacs",
+  "issue_tracker": "https://github.com/DavidLouda/xiaomi-pet-air-purifier-hacs/issues",
+  "codeowners": ["@DavidLouda"],
+  "config_flow": true,
+  "requirements": ["python-miio>=0.5.12"],
+  "iot_class": "local_polling",
+  "version": "1.0.0"
+}

@@ -1,0 +1,22 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Xiaomi Pet Air Purifier Setup",
+        "description": "Enter the device connection details",
+        "data": {
+          "host": "IP Address",
+          "token": "Token",
+          "name": "Device Name"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to the device. Please check the IP address and token.",
+      "unknown": "An unexpected error occurred"
+    },
+    "abort": {
+      "already_configured": "This device is already configured"
+    }
+  }
+}

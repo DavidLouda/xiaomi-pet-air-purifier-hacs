@@ -1,0 +1,22 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Nastavení Xiaomi Pet Air Purifier",
+        "description": "Zadejte údaje pro připojení k zařízení",
+        "data": {
+          "host": "IP Adresa",
+          "token": "Token",
+          "name": "Název zařízení"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Nepodařilo se připojit k zařízení. Zkontrolujte IP adresu a token.",
+      "unknown": "Nastala neočekávaná chyba"
+    },
+    "abort": {
+      "already_configured": "Toto zařízení je již nakonfigurováno"
+    }
+  }
+}
