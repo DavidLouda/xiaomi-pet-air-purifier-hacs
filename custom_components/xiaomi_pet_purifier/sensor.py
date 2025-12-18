@@ -31,7 +31,6 @@ async def async_setup_entry(
             coordinator,
             name,
             "pm25",
-            "PM2.5",
             "mdi:air-filter",
             "µg/m³",
             SensorDeviceClass.PM25,
@@ -41,7 +40,6 @@ async def async_setup_entry(
             coordinator,
             name,
             "filter_life",
-            "Filter Life Remaining",
             "mdi:air-filter",
             PERCENTAGE,
             None,
@@ -51,7 +49,6 @@ async def async_setup_entry(
             coordinator,
             name,
             "filter_used_time",
-            "Filter Used Time",
             "mdi:clock-outline",
             UnitOfTime.DAYS,
             None,
@@ -61,7 +58,6 @@ async def async_setup_entry(
             coordinator,
             name,
             "filter_left_time",
-            "Filter Time Remaining",
             "mdi:clock-outline",
             UnitOfTime.DAYS,
             None,
@@ -75,12 +71,13 @@ async def async_setup_entry(
 class XiaomiPetAirPurifierSensor(CoordinatorEntity, SensorEntity):
     """Representation of a Xiaomi Pet Air Purifier sensor."""
 
+    _attr_has_entity_name = True
+
     def __init__(
         self,
         coordinator,
         device_name: str,
         sensor_type: str,
-        sensor_name: str,
         icon: str,
         unit: str | None,
         device_class: SensorDeviceClass | None,
@@ -89,7 +86,6 @@ class XiaomiPetAirPurifierSensor(CoordinatorEntity, SensorEntity):
         """Initialize the sensor."""
         super().__init__(coordinator)
         self._sensor_type = sensor_type
-        self._attr_name = f"{device_name} {sensor_name}"
         self._attr_unique_id = f"{coordinator.entry.entry_id}_{sensor_type}"
         self._attr_icon = icon
         self._attr_native_unit_of_measurement = unit
@@ -101,6 +97,7 @@ class XiaomiPetAirPurifierSensor(CoordinatorEntity, SensorEntity):
             "manufacturer": "Xiaomi",
             "model": "Smart Pet Care Air Purifier (CPA5)",
         }
+        self._attr_translation_key = sensor_type
 
     @property
     def native_value(self):
