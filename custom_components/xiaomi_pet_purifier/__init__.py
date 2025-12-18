@@ -10,7 +10,27 @@ from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
-from .const import DOMAIN, SCAN_INTERVAL
+from .const import (
+    DOMAIN,
+    PIID_ALARM,
+    PIID_BRIGHTNESS,
+    PIID_CHILD_LOCK,
+    PIID_FAN_LEVEL,
+    PIID_FILTER_LEFT_TIME,
+    PIID_FILTER_LIFE,
+    PIID_FILTER_USED_TIME,
+    PIID_MODE,
+    PIID_PM25,
+    PIID_POWER,
+    SCAN_INTERVAL,
+    SIID_AIR_PURIFIER,
+    SIID_ALARM,
+    SIID_ENVIRONMENT,
+    SIID_FAVORITE,
+    SIID_FILTER,
+    SIID_PHYSICAL_CONTROLS,
+    SIID_SCREEN,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -76,16 +96,28 @@ class XiaomiPetAirPurifierCoordinator(DataUpdateCoordinator):
     def _get_data(self):
         """Get data from device (runs in executor)."""
         properties = [
-            {"did": "power", "siid": 2, "piid": 1},
-            {"did": "mode", "siid": 2, "piid": 5},
-            {"did": "pm25", "siid": 3, "piid": 1},
-            {"did": "filter_life", "siid": 4, "piid": 1},
-            {"did": "filter_used_time", "siid": 4, "piid": 2},
-            {"did": "filter_left_time", "siid": 4, "piid": 3},
-            {"did": "brightness", "siid": 5, "piid": 1},
-            {"did": "alarm", "siid": 6, "piid": 1},
-            {"did": "child_lock", "siid": 7, "piid": 1},
-            {"did": "fan_level", "siid": 8, "piid": 1},
+            {"did": "power", "siid": SIID_AIR_PURIFIER, "piid": PIID_POWER},
+            {"did": "mode", "siid": SIID_AIR_PURIFIER, "piid": PIID_MODE},
+            {"did": "pm25", "siid": SIID_ENVIRONMENT, "piid": PIID_PM25},
+            {"did": "filter_life", "siid": SIID_FILTER, "piid": PIID_FILTER_LIFE},
+            {
+                "did": "filter_used_time",
+                "siid": SIID_FILTER,
+                "piid": PIID_FILTER_USED_TIME,
+            },
+            {
+                "did": "filter_left_time",
+                "siid": SIID_FILTER,
+                "piid": PIID_FILTER_LEFT_TIME,
+            },
+            {"did": "brightness", "siid": SIID_SCREEN, "piid": PIID_BRIGHTNESS},
+            {"did": "alarm", "siid": SIID_ALARM, "piid": PIID_ALARM},
+            {
+                "did": "child_lock",
+                "siid": SIID_PHYSICAL_CONTROLS,
+                "piid": PIID_CHILD_LOCK,
+            },
+            {"did": "fan_level", "siid": SIID_FAVORITE, "piid": PIID_FAN_LEVEL},
         ]
 
         response = self.device.send("get_properties", properties)
