@@ -1,6 +1,15 @@
 """Xiaomi Pet Air Purifier integration."""
 import logging
+import warnings
 from datetime import timedelta
+
+# Suppress python-miio FutureWarning related to Python 3.13
+warnings.filterwarnings(
+    "ignore",
+    category=FutureWarning,
+    module="miio.miot_device",
+    message=".*functools.partial will be a method descriptor.*",
+)
 
 from miio import Device, DeviceException
 
