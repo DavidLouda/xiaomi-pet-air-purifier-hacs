@@ -47,11 +47,6 @@ class XiaomiPetAirPurifierFan(CoordinatorEntity, FanEntity):
 
     _attr_has_entity_name = True
     _attr_name = None
-    _attr_supported_features = (
-        FanEntityFeature.PRESET_MODE | FanEntityFeature.SET_SPEED
-    )
-    _attr_preset_modes = PRESET_MODES
-    _attr_speed_count = int_states_in_range(SPEED_RANGE)
 
     def __init__(self, coordinator, name: str) -> None:
         """Initialize the fan."""
@@ -63,6 +58,13 @@ class XiaomiPetAirPurifierFan(CoordinatorEntity, FanEntity):
             "manufacturer": "Xiaomi",
             "model": "Smart Pet Care Air Purifier (CPA5)",
         }
+        self._attr_preset_modes = PRESET_MODES
+        self._attr_speed_count = int_states_in_range(SPEED_RANGE)
+
+    @property
+    def supported_features(self) -> int:
+        """Flag supported features."""
+        return FanEntityFeature.PRESET_MODE | FanEntityFeature.SET_SPEED | FanEntityFeature.TURN_ON | FanEntityFeature.TURN_OFF
 
     @property
     def is_on(self) -> bool:
@@ -107,13 +109,16 @@ class XiaomiPetAirPurifierFan(CoordinatorEntity, FanEntity):
         **kwargs: Any,
     ) -> None:
         """Turn on the fan."""
+        _LOGGER.debug("Turn on called with percentage=%s, preset_mode=%s", percentage, preset_mode)
+        
         try:
             # First turn on the device
-            await self.hass.async_add_executor_job(
+            result = await self.hass.async_add_executor_job(
                 self.coordinator.device.send,
                 "set_properties",
                 [{"siid": 2, "piid": 1, "value": True}],
             )
+            _LOGGER.debug("Turn on result: %s", result)
 
             # Wait a moment for device to turn on
             await asyncio.sleep(0.5)
@@ -126,21 +131,24 @@ class XiaomiPetAirPurifierFan(CoordinatorEntity, FanEntity):
             await self.coordinator.async_request_refresh()
 
         except Exception as ex:
-            _LOGGER.error("Failed to turn on: %s", ex)
+            _LOGGER.error("Failed to turn on: %s", ex, exc_info=True)
             raise
 
     async def async_turn_off(self, **kwargs: Any) -> None:
         """Turn off the fan."""
+        _LOGGER.debug("Turn off called")
+        
         try:
-            await self.hass.async_add_executor_job(
+            result = await self.hass.async_add_executor_job(
                 self.coordinator.device.send,
                 "set_properties",
                 [{"siid": 2, "piid": 1, "value": False}],
             )
+            _LOGGER.debug("Turn off result: %s", result)
             await self.coordinator.async_request_refresh()
 
         except Exception as ex:
-            _LOGGER.error("Failed to turn off: %s", ex)
+            _LOGGER.error("Failed to turn off: %s", ex, exc_info=True)
             raise
 
     async def async_set_preset_mode(self, preset_mode: str) -> None:
@@ -152,16 +160,19 @@ class XiaomiPetAirPurifierFan(CoordinatorEntity, FanEntity):
             _LOGGER.error("Invalid preset mode: %s", preset_mode)
             return
 
+        _LOGGER.debug("Setting preset mode to %s (value=%s)", preset_mode, mode_value)
+
         try:
-            await self.hass.async_add_executor_job(
+            result = await self.hass.async_add_executor_job(
                 self.coordinator.device.send,
                 "set_properties",
                 [{"siid": 2, "piid": 5, "value": mode_value}],
             )
+            _LOGGER.debug("Set preset mode result: %s", result)
             await self.coordinator.async_request_refresh()
 
         except Exception as ex:
-            _LOGGER.error("Failed to set preset mode: %s", ex)
+            _LOGGER.error("Failed to set preset mode: %s", ex, exc_info=True)
             raise
 
     async def async_set_percentage(self, percentage: int) -> None:
@@ -171,27 +182,31 @@ class XiaomiPetAirPurifierFan(CoordinatorEntity, FanEntity):
             return
 
         fan_level = percentage_to_ranged_value(SPEED_RANGE, percentage)
+        _LOGGER.debug("Setting percentage to %s (fan_level=%s)", percentage, fan_level)
 
         try:
             # First set to Favorite mode
-            await self.hass.async_add_executor_job(
+            result1 = await self.hass.async_add_executor_job(
                 self.coordinator.device.send,
                 "set_properties",
                 [{"siid": 2, "piid": 5, "value": MODE_FAVORITE}],
             )
+            _LOGGER.debug("Set mode to Favorite result: %s", result1)
 
             await asyncio.sleep(0.3)
 
             # Then set fan level
-            await self.hass.async_add_executor_job(
+            result2 = await self.hass.async_add_executor_job(
                 self.coordinator.device.send,
                 "set_properties",
                 [{"siid": 8, "piid": 1, "value": fan_level}],
             )
+            _LOGGER.debug("Set fan level result: %s", result2)
+            
             await self.coordinator.async_request_refresh()
 
         except Exception as ex:
-            _LOGGER.error("Failed to set fan level: %s", ex)
+            _LOGGER.error("Failed to set fan level: %s", ex, exc_info=True)
             raise
 
     @callback
