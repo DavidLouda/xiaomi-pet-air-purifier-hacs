@@ -99,10 +99,20 @@ class XiaomiPetAirPurifierSensor(CoordinatorEntity, SensorEntity):
         }
         self._attr_translation_key = sensor_type
 
+        # Disable filter time sensors by default
+        if sensor_type in ["filter_used_time", "filter_left_time"]:
+            self._attr_entity_registry_enabled_default = False
+
     @property
     def native_value(self):
         """Return the state of the sensor."""
-        return self.coordinator.data.get(self._sensor_type)
+        value = self.coordinator.data.get(self._sensor_type)
+        if value is not None and self._sensor_type in [
+            "filter_used_time",
+            "filter_left_time",
+        ]:
+            return round(value / 24, 1)
+        return value
 
     @callback
     def _handle_coordinator_update(self) -> None:
